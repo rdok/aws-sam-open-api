@@ -4,7 +4,22 @@ Description: Showcases using OpenAPI with AWS SAM
 Globals:
   Function:
     Timeout: 3
+Parameters:
+  OpenAPIReference:
+    Type: String
 Resources:
+  Api:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      OpenApiVersion: "3.0.0"
+      DefinitionBody:
+        'Fn::Transform':
+          Name: 'AWS::Include'
+          Parameters:
+            Location:
+              Fn::Sub: ${OpenAPIReference}/reference/hello-world.v1.yaml
+
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -15,12 +30,13 @@ Resources:
         HelloWorld:
           Type: Api
           Properties:
-            Path: /hello
-            Method: get
+            RestApiId: !Ref Api
+            Path: /{proxy+}
+            Method: ANY
 Outputs:
-  HelloWorldApi:
+  Api:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Value: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello-world/"
   HelloWorldFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt HelloWorldFunction.Arn
