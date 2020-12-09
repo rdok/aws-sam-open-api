@@ -1,4 +1,3 @@
 # aws-sam-openapi
 
-Showcases using OpenAPI with AWS SAM.
-
+Showcases spike(s), on automating API Gateway with OpenAPI.

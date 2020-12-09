@@ -19,7 +19,6 @@ Resources:
           Parameters:
             Location:
               Fn::Sub: ${OpenAPIReference}/reference/hello-world.v1.yaml
-
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
