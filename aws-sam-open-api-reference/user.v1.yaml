@@ -1,5 +1,8 @@
-title: User
-type: object
-properties:
-  id:
-    type: string
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      properties:
+        id:
+          type: string

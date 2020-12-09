@@ -11,8 +11,12 @@ Resources:
   Api:
     Type: AWS::Serverless::Api
     Properties:
-      StageName: Prod
       OpenApiVersion: "3.0.0"
+      StageName: Prod
+#      Models:
+#        'Fn::Transform':
+#          Name: 'AWS::Include'
+#          Parameters: {Location: {Fn::Sub: "${OpenAPIReference}/user.v1.yaml"}}
       DefinitionBody:
         'Fn::Transform':
           Name: 'AWS::Include'
@@ -36,6 +40,8 @@ Outputs:
   Api:
     Description: "API Gateway endpoint URL for Prod stage for Hello World function"
     Value: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello-world/"
+  ApiID:
+    Value: !Ref Api
   HelloWorldFunction:
     Description: "Hello World Lambda Function ARN"
     Value: !GetAtt HelloWorldFunction.Arn
