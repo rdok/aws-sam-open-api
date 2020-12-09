@@ -6,7 +6,8 @@ start-api:
 	sam local start-api --port 3010
 
 build-deploy:
-	aws --profile rdok s3 cp open-api/ s3://$${DEPLOY_BUCKET}/open-api/ --recursive
+	aws --profile rdok s3 cp aws-sam-open-api-reference/ \
+	    s3://$${DEPLOY_BUCKET}/aws-sam-open-api-reference/ --recursive
 	sam build
 	sam deploy --profile rdok --parameter-overrides \
-		OpenAPIReference="s3://$${DEPLOY_BUCKET}/open-api"
+		OpenAPIReference="s3://$${DEPLOY_BUCKET}/aws-sam-open-api-reference"

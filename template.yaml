@@ -18,7 +18,7 @@ Resources:
           Name: 'AWS::Include'
           Parameters:
             Location:
-              Fn::Sub: ${OpenAPIReference}/reference/hello-world.v1.yaml
+              Fn::Sub: ${OpenAPIReference}/hello-world.v1.yaml
   HelloWorldFunction:
     Type: AWS::Serverless::Function
     Properties:
