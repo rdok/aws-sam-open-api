@@ -24,6 +24,7 @@ paths:
                   $ref: '#/components/schemas/Message'
                 external-model:
                   $ref: ./user.v1.yaml
+            examples: {}
       x-amazon-apigateway-integration:
         uri:
           'Fn::Sub': 'arn:aws:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/${HelloWorldFunction.Arn}/invocations'

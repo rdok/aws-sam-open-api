@@ -16,9 +16,9 @@ build-deploy:
 
 export-openapi:
 	API_ID=$$(aws cloudformation describe-stacks  \
-		  --stack-name "${STACK_NAME}" \
-		  --query 'Stacks[0].Outputs[?OutputKey==`ApiID`].OutputValue' \
-		  --output text); \
+		--stack-name "${STACK_NAME}" \
+		--query 'Stacks[0].Outputs[?OutputKey==`ApiID`].OutputValue' \
+		--output text); \
 	aws --profile rdok --region eu-west-1 apigateway get-export \
 		--rest-api-id "$${API_ID}" \
 		--stage-name Prod \
